@@ -26,7 +26,7 @@
 #                                • Modification des limites supérieur (150) et inférieur (100)
 #                                • Affichage des nouvelles valeurs (Limites uniquement)
 #                                • Génération et affichage du nombre avec limites modifiées
-
+#
 #
 #               Contraintes :
 #                                • Fichier python nommé « randomize_management.py »

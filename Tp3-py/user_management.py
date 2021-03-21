@@ -90,7 +90,7 @@
 #                                   • Fonction « set_new_max_user »
 #                                       • Le nombre maximum d’utilisateur est mis à jour uniquement
 #                                         dans le cas où il est supérieur au précédent
-
+#
 #                                   • Fonction « add_new_user »
 #                                       • L’ajout d’utilisateur n’est possible que si le
 #                                         nombre maximum n’est pas atteint
@@ -102,7 +102,7 @@
 #                                           • Clé « statistics » avec un dictionnaire vide pour les futures statistiques
 #                                       • La fonction retourne un tuple avec
 #                                         (Nouvel identifiant, Max user atteint ou pas)
-
+#
 #                                   • Fonction « get_list_of_users »
 #                                       • Retourne une liste de tuples contenant
 #                                         (Identifiant utilisateur, Nom complet utilisateur)
@@ -114,7 +114,7 @@
 #                                           • Range max
 #                                           • Nombre de tentative
 #                                       • La clé de l’événement est la date d’ajout au format ISO
-
+#
 #                                   • Fonction « get_user_name »
 #                                       • Retourne le nom complet de l’utilisateur
 #                                       • Nom complet utilisateur veut dire « [Prénom] [Nom] »
