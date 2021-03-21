@@ -143,3 +143,125 @@
 # ==============================================================================
 # IMPORTS
 # ==============================================================================
+
+import ast
+
+# ==============================================================================
+# GLOBAL VARIABLE
+# ==============================================================================
+
+all_users_information = {}
+first_name_question = "What is the first name of the user: "
+last_name_question = "What is the last name of the user: "
+loading_success_message = "Users statistics loaded!"
+loading_failed_message = "No previous statistics to load..."
+saving_message = "Users statistics saved!"
+statistic_file = "statistics.dat"
+
+
+# ==============================================================================
+# SUB FUNCTIONS
+# ==============================================================================
+
+# Defining function
+def load_statistics():
+    """
+    This function load statistics from the dictionary on the statistic_file
+
+    :return: None
+    """
+    # Importing variable from global scope
+    global all_users_information
+    global statistic_file
+    # Sequential control structure
+    try:
+        with open(statistic_file, "r") as file:
+            # Loading variable from file
+            all_users_information = ast.literal_eval(file.read())
+            # Displaying variable
+            print(loading_success_message + "\n")
+    except IOError:
+        # Displaying variable
+        print(loading_failed_message + "\n")
+
+
+# Defining function
+def save_statistics():
+    """
+    This function overwrite on the statistic_file the new users information on the statistic_file
+
+    :return: None
+    """
+    # Importing variable from global scope
+    global all_users_information
+    # Saving string inside file
+    file = open(statistic_file, "w")
+    file.write(str(all_users_information))
+    file.close()
+    # Displaying variable
+    print(saving_message + "\n")
+
+
+# Defining function
+def add_new_user():
+    """
+    This function add all information of the new user
+
+    :return: None
+    """
+    # Importing variable from global scope
+    global all_users_information
+    global user_max
+    global user_id
+    # Sequential control structure
+    if user_id >= user_max:
+        # Displaying string
+        print("The maximum amount of users has been reached!\n")
+    else:
+        # Calling function
+        all_users_information[user_id] = get_user_name()
+        # Displaying variable
+        print("New user \"{0} {1}\" has been created\n".format(
+            all_users_information[user_id]["id_f_name"],
+            all_users_information[user_id]["id_l_name"]
+        ))
+
+
+# Defining function
+def get_user_name():
+    """
+    This function retrieves all_users_information and add it in the dictionary
+
+    :return: user_name
+    """
+    # Defining dictionary
+    user_name = dict({
+        "id_f_name": input("What is the first name of the user: "),
+        "id_l_name": input("What is the last name of the user: ")
+    })
+    # Returning list
+    return user_name
+
+
+# ==============================================================================
+# PROCESS
+# ==============================================================================
+
+if __name__ == '__main__':
+
+    # Calling function
+    load_statistics()
+    print(all_users_information)
+    # Defining variables
+    user_id = 0
+    user_max = 2
+    user_required = 3
+    # Iterative control structure
+    for user_id in range(user_required):
+        # Calling function
+        add_new_user()
+        # Incrementing variable
+        user_id += 1
+    # Calling function
+    save_statistics()
+    print(all_users_information)
