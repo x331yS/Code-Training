@@ -97,6 +97,7 @@ import roman
 # ==============================================================================
 
 win = False
+quit_game = False
 try_number = 0
 set_top_space = "/======================================"
 set_end_space = "\\======================================"
@@ -128,11 +129,12 @@ def ask_the_number_to_user():
     """
     # Importing variable from global scope
     global try_number
+    global quit_game
 
     # Retrieving number from user
     user_num = int(input("| Give me a number: "))
-    if type(user_num) == str:
-        print(wrong_answer)
+    if type(user_num) == "/q":
+        quit_game = True
         printer_top()
     check_the_number(user_num)
 
@@ -234,10 +236,20 @@ def start_the_finder():
 
 
 def printer_top():
+    """
+    This function print the top format
+
+    :return: None
+    """
     print(set_top_space)
 
 
 def printer_end():
+    """
+    This function print the end format
+
+    :return: None
+    """
     print(set_end_space)
     print()
 

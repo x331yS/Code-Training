@@ -143,110 +143,138 @@
 # ==============================================================================
 # IMPORTS
 # ==============================================================================
-import finder_management
+
 import ast
+import finder_management
 
 # ==============================================================================
 # GLOBAL VARIABLE
 # ==============================================================================
 
+
 all_users_information = {}
-first_name_question = "What is the first name of the user: "
-last_name_question = "What is the last name of the user: "
-loading_success_message = "Users statistics loaded!"
-loading_failed_message = "No previous statistics to load..."
-saving_message = "Users statistics saved!"
+first_name_question = "| What is the first name of the user: "
+last_name_question = "| What is the last name of the user: "
+loading_success_message = "| Users statistics loaded!"
+loading_failed_message = "| No previous statistics to load..."
+saving_message = "| Users statistics saved!"
 statistic_file = "statistics.dat"
-user_max_reached = "=> Maximum number of user have been reached <="
+user_number = 0
 
 
 # ==============================================================================
 # SUB FUNCTIONS
 # ==============================================================================
 
-# Defining function
 def load_statistics():
     """
-    This function load and read statistics from the dictionary on the statistic_file
+    This function retrieves data from the statistic_file to the all_the_users_information
 
     :return: None
     """
     # Importing variable from global scope
     global all_users_information
     global statistic_file
+    global user_number
     # Sequential control structure
     try:
         with open(statistic_file, "r") as file:
             # Loading variable from file
             all_users_information = ast.literal_eval(file.read())
             # Displaying variable
+            finder_management.printer_top()
             print(loading_success_message)
-            print(finder_management.set_space)
+            finder_management.printer_end()
     except IOError:
         # Displaying variable
-        print(loading_failed_message + "\n")
+        finder_management.printer_top()
+        print(loading_failed_message)
+        finder_management.printer_end()
 
 
-# Defining function
 def save_statistics():
     """
-    This function overwrite on the statistic_file the new users information on the statistic_file
+    This function saves statistics from the all_the_users_information dictionary to the statistic_file
 
     :return: None
     """
     # Importing variable from global scope
     global all_users_information
-    # Saving string inside file
+    # Open, Write and Close inside file statistics.dat
     file = open(statistic_file, "w")
     file.write(str(all_users_information))
     file.close()
     # Displaying variable
-    print(saving_message + "\n")
+    finder_management.printer_top()
+    print(saving_message)
+    finder_management.printer_end()
 
 
-# Defining function
 def add_new_user():
     """
-    This function add all information of the new user
+    This function adds a new dictionary with the id of the all_users_information
+    with the get_user_name function
 
     :return: None
     """
-    # Importing variable from global scope
-    global all_users_information
-    global user_max
-    global user_id
-    # Sequential control structure
-    if user_id >= user_max:
-        # Displaying string
-        print(user_max_reached)
-        print("Previous maximum of user: {0}\nNew maximum of user: {1}\nLast maximum of user: {2}".format(user_max,
-                                                                                                          user_required,
-                                                                                                          user_max))
-    else:
-        # Calling function
-        all_users_information[user_id] = get_user_name()
-        # Displaying variable
-        print("New user '{0} {1}' has been created\n".format(
-            all_users_information[user_id]["id_f_name"],
-            all_users_information[user_id]["id_l_name"]
-        ))
-        print(finder_management.set_space)
+
+    for user_id in range(user_number, all_users_information["data"]["user_required"]):
+        # Iterative control structure
+        if user_id >= all_users_information["data"]["user_max"]:
+            # Displaying string
+            finder_management.printer_top()
+            print("| => Maximum number of user have been reached <=")
+            # Calling function
+            finder_management.printer_end()
+        else:
+            # Calling function
+            all_users_information[user_id] = get_user_name()
+            all_users_information[user_id]["stats"] = {}
+            # Displaying variable
+            print("| New user '{0} {1}' have been created\n| Default statistics set to '{2}'".format(
+                all_users_information[user_id]["id_f_name"],
+                all_users_information[user_id]["id_l_name"],
+                all_users_information[user_id]["stats"]
+            ))
+            # Calling function
+            finder_management.printer_end()
 
 
-# Defining function
 def get_user_name():
     """
-    This function retrieves all_users_information and add it in the dictionary
+    This function returns a dictionary corresponding to a name with two strings inputted by the user
 
     :return: user_name
     """
-    # Defining dictionary
-    user_name = dict({
-        "id_f_name": input("What is the first name of the user: "),
-        "id_l_name": input("What is the last name of the user: ")
+    # Define dictionary
+    finder_management.printer_top()
+    user_data = dict({
+        "id_f_name": input("| What is the first name of the user: "),
+        "id_l_name": input("| What is the last name of the user: ")
     })
     # Returning list
-    return user_name
+    return user_data
+
+
+def set_max_user(new_user_max):
+    """
+    This function overwrites the value for the "user_max" key in the all_users_information dictionary
+
+    :param new_user_max: Number - The new number corresponding to the new maximum amount of users
+    :return: None
+    """
+    # Defining variable
+    last_user_max = all_users_information["data"]["user_max"]
+    # Displaying variable
+    finder_management.printer_top()
+    print("| Previous maximum of users: '{0}'".format(
+        last_user_max
+    ))
+    # Redefining variable
+    all_users_information["data"]["user_max"] = new_user_max
+    print("| New maximum of users: '{0}'\n"
+          "| Last maximum of users: '{1}'".format(new_user_max, last_user_max))
+    finder_management.printer_end()
 
 
 # ==============================================================================
@@ -254,18 +282,12 @@ def get_user_name():
 # ==============================================================================
 
 if __name__ == '__main__':
-
-    # Calling function
     load_statistics()
-    # Defining variables
-    user_id = 0
-    user_max = 2
-    user_required = 3
-    # Iterative control structure
-    for user_id in range(user_required):
-        # Calling function
-        add_new_user()
-        # Incrementing variable
-        user_id += 1
+    # Calling function
+    add_new_user()
+    # Calling function
+    set_max_user(3)
+    # Redefining value
+    all_users_information["data"]["user_required"] = 4
     # Calling function
     save_statistics()
