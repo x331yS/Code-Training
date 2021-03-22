@@ -98,18 +98,21 @@ import roman
 
 win = False
 try_number = 0
-main_question = "Aim of this game is to find a randomize number as:\n" \
-                "Lower or equal to '{0}':\n" \
-                "Upper or equal to '{1}':"
-lower_question = "Give me the new lower limit: "
-upper_question = "Give me the new upper limit: "
-good_answer = "Yes. It is! You win!"
-count_display = "Success in '{0}' attempt(s)"
-bad_lower_answer = "No. It's lower..."
-bad_upper_answer = "No. It's upper..."
-set_space = "\\================================\\"
+set_top_space = "/======================================"
+set_end_space = "\\======================================"
+set_middle_space = "|======================================"
+main_question = "| Aim of this game is to find a randomize number as:\n" \
+                "| - Lower or equal to '{0}':\n" \
+                "| - Upper or equal to '{1}':"
+lower_question = "| Give me the new lower limit: "
+upper_question = "| Give me the new upper limit: "
+good_answer = "| Yes. It is! You win!"
+count_display = "| Success in '{0}' attempt(s)."
+bad_lower_answer = "| No. It's lower..."
+bad_upper_answer = "| No. It's upper..."
+wrong_answer = "| Please, give a numeral input in the limits"
 game_number = 1
-game = "Game"
+game = "| Game"
 
 
 # ==============================================================================
@@ -119,7 +122,7 @@ game = "Game"
 # Defining function
 def ask_the_number_to_user():
     """
-    This function send a message for the user and retrieves an int into the variable user_number
+    This function send a message for the user and retrieves an int into the variable user_num
 
     :return: None
     """
@@ -127,33 +130,41 @@ def ask_the_number_to_user():
     global try_number
 
     # Retrieving number from user
-    user_number = int(input("Give me a number: "))
-    check_the_number(user_number)
+    user_num = int(input("| Give me a number: "))
+    if type(user_num) == str:
+        print(wrong_answer)
+        printer_top()
+    check_the_number(user_num)
 
 
 # Defining function
-def check_the_number(user_number):
+def check_the_number(user_num):
     """
     This function check if the user number is less than , equal or greater than the internal_number
 
-    :param user_number : The number of the user
+    :param user_num : The number of the user
     :return: None
     """
     # Importing variable from global scope
     global win
 
+    # Check user_num in limits
+    if user_num < randomize_management.internal_lower_limit or user_num > randomize_management.internal_upper_limit:
+        print(wrong_answer)
+        print(set_middle_space)
     # If number is randomize, bool is True
-    if user_number > randomize_management.internal_number:
-        # If superior
-        print(bad_lower_answer)
-        print(set_space)
-    elif user_number < randomize_management.internal_number:
-        # If inferior
-        print(bad_upper_answer)
-        print(set_space)
     else:
-        print(good_answer)
-        win = True
+        if user_num > randomize_management.internal_number:
+            # If superior
+            print(bad_lower_answer)
+            print(set_middle_space)
+        elif user_num < randomize_management.internal_number:
+            # If inferior
+            print(bad_upper_answer)
+            print(set_middle_space)
+        else:
+            print(good_answer)
+            win = True
 
 
 # Defining function
@@ -166,6 +177,7 @@ def limits_modify(new_lower_limit, new_upper_limit):
     :param new_upper_limit : The new modified upper limit
     :return: None
     """
+
     randomize_management.set_internal_lower_limit(new_lower_limit)
     randomize_management.set_internal_upper_limit(new_upper_limit)
 
@@ -178,7 +190,7 @@ def congrats_user():
     :return: None
     """
     print(count_display.format(try_number))
-    print(set_space)
+    printer_end()
 
 
 # Defining function
@@ -193,16 +205,19 @@ def start_the_finder():
     global win
     global try_number
     global game_number
+
+    # Convert int to roman int
+    printer_top()
     print(game, roman.toRoman(game_number))
     game_number += 1
 
     # Main question
-    print(set_space)
+    print(set_middle_space)
     print(main_question.format(
         randomize_management.get_internal_lower_limit(),
         randomize_management.get_internal_upper_limit()
     ))
-    print(set_space)
+    print(set_middle_space)
     # Calling function
     randomize_management.set_internal_number()
     # Iterative control structure
@@ -216,6 +231,15 @@ def start_the_finder():
     # Resetting variable
     win = False
     try_number = 0
+
+
+def printer_top():
+    print(set_top_space)
+
+
+def printer_end():
+    print(set_end_space)
+    print()
 
 
 # ==============================================================================
@@ -232,16 +256,22 @@ if __name__ == '__main__':
     start_the_finder()
 
     # Modifying limits for Game III
+    printer_top()
     limits_modify(int(input(lower_question)), 200)
+    printer_end()
     # Calling function for Game III
     start_the_finder()
 
     # Modifying limits for Game IV
+    printer_top()
     limits_modify(100, int(input(upper_question)))
+    printer_end()
     # Calling function for Game IV
     start_the_finder()
 
     # Modifying limits for Game V
+    printer_top()
     limits_modify(int(input(lower_question)), int(input(upper_question)))
+    printer_end()
     # Calling function for Game V
     start_the_finder()

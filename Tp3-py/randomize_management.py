@@ -63,6 +63,7 @@
 # ==============================================================================
 
 import random
+import finder_management
 
 # ==============================================================================
 # GLOBAL VARIABLE
@@ -167,22 +168,23 @@ def set_internal_upper_limit(new_upper_limit):
 # ==============================================================================
 
 if __name__ == '__main__':
+    finder_management.printer_top()
     print(
-        "Default internal_number is: {0}\n"
-        "Default internal_lower_limit is: {1}\n"
-        "default internal_upper_limit is: {2}".format(
+        "| Original internal_number is: '{0}'\n"
+        "| Original internal_upper_limit is: '{2}'\n"
+        "| Original internal_lower_limit is: '{1}'".format(
             get_internal_number(),
             get_internal_lower_limit(),
             get_internal_upper_limit()
         ))
+    print(finder_management.set_middle_space)
     # Calling function for test
     set_internal_number()
     print(
-        "Generated internal_number with default limit is: {0}".format(
+        "| Generated internal_number with default limit is: '{0}'".format(
             get_internal_number()
         ))
-
-    print()
+    finder_management.printer_end()
 
     # Calling functions for test
     set_internal_lower_limit(100)
@@ -190,13 +192,16 @@ if __name__ == '__main__':
     set_internal_number()
 
     # Showing modified values
+    finder_management.printer_top()
     print(
-        "Modified internal_lower_limit is: {0}\n"
-        "Modified internal_upper_limit is: {1}".format(
+        "| Modified internal_upper_limit is: '{1}'\n"
+        "| Modified internal_lower_limit is: '{0}'".format(
             get_internal_lower_limit(),
             get_internal_upper_limit()
         ))
+    print(finder_management.set_middle_space)
     print(
-        "Generated internal_number with modified limit is: {0}".format(
+        "| Generated internal_number with modified limit is: '{0}'".format(
             get_internal_number()
         ))
+    finder_management.printer_end()
