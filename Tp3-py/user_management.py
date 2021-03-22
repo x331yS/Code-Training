@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 # ##############################################################################
-# Description:  This script randomize numbers for riddle game
+# Description:  This script create a dictionary with user name and user statistics
 #
 # Required:     - Run as Standard User.
 #               - Python 3.x
@@ -143,7 +143,7 @@
 # ==============================================================================
 # IMPORTS
 # ==============================================================================
-
+import finder_management
 import ast
 
 # ==============================================================================
@@ -157,6 +157,7 @@ loading_success_message = "Users statistics loaded!"
 loading_failed_message = "No previous statistics to load..."
 saving_message = "Users statistics saved!"
 statistic_file = "statistics.dat"
+user_max_reached = "=> Maximum number of user have been reached <="
 
 
 # ==============================================================================
@@ -166,7 +167,7 @@ statistic_file = "statistics.dat"
 # Defining function
 def load_statistics():
     """
-    This function load statistics from the dictionary on the statistic_file
+    This function load and read statistics from the dictionary on the statistic_file
 
     :return: None
     """
@@ -179,7 +180,8 @@ def load_statistics():
             # Loading variable from file
             all_users_information = ast.literal_eval(file.read())
             # Displaying variable
-            print(loading_success_message + "\n")
+            print(loading_success_message)
+            print(finder_management.set_space)
     except IOError:
         # Displaying variable
         print(loading_failed_message + "\n")
@@ -216,15 +218,19 @@ def add_new_user():
     # Sequential control structure
     if user_id >= user_max:
         # Displaying string
-        print("The maximum amount of users has been reached!\n")
+        print(user_max_reached)
+        print("Previous maximum of user: {0}\nNew maximum of user: {1}\nLast maximum of user: {2}".format(user_max,
+                                                                                                          user_required,
+                                                                                                          user_max))
     else:
         # Calling function
         all_users_information[user_id] = get_user_name()
         # Displaying variable
-        print("New user \"{0} {1}\" has been created\n".format(
+        print("New user '{0} {1}' has been created\n".format(
             all_users_information[user_id]["id_f_name"],
             all_users_information[user_id]["id_l_name"]
         ))
+        print(finder_management.set_space)
 
 
 # Defining function
@@ -251,7 +257,6 @@ if __name__ == '__main__':
 
     # Calling function
     load_statistics()
-    print(all_users_information)
     # Defining variables
     user_id = 0
     user_max = 2
@@ -264,4 +269,3 @@ if __name__ == '__main__':
         user_id += 1
     # Calling function
     save_statistics()
-    print(all_users_information)
