@@ -78,7 +78,7 @@ internal_upper_limit = 1000
 # SUB FUNCTIONS
 # ==============================================================================
 
-# Defining function
+
 def get_internal_number():
     """
     This function retrieves the internal_number variable from global variable
@@ -86,13 +86,12 @@ def get_internal_number():
 
     :return: internal_number
     """
-    # Importing variable from global scope
+    # Importing variable
     global internal_number
-    # Returning variable
+    # Return variable
     return internal_number
 
 
-# Defining function
 def set_internal_number():
     """
     This function overwrites the internal_number variable into a random number between internal_lower_limit and
@@ -100,15 +99,14 @@ def set_internal_number():
 
     :return: None
     """
-    # Importing variables from global scope
+    # Importing variables
     global internal_number
     global internal_lower_limit
     global internal_upper_limit
-    # Redefining variable
+    # Redefine variable
     internal_number = random.randint(internal_lower_limit, internal_upper_limit)
 
 
-# Defining function
 def get_internal_lower_limit():
     """
     This function retrieves the internal_lower_limit variable from global variable
@@ -116,13 +114,12 @@ def get_internal_lower_limit():
 
     :return: internal_lower_limit: The low limit of the scope
     """
-    # Importing variable from global scope
+    # Importing variable
     global internal_lower_limit
-    # Returning variable
+    # Return variable
     return internal_lower_limit
 
 
-# Defining function
 def set_internal_lower_limit(new_lower_limit):
     """
     This function overwrites the internal_lower_limit variable into the new_lower_limit parameter
@@ -130,26 +127,24 @@ def set_internal_lower_limit(new_lower_limit):
     :param new_lower_limit : The new modified lower limit
     :return: None
     """
-    # Importing variable from global scope
+    # Importing variable
     global internal_lower_limit
-    # Redefining variable
+    # Redefine variable
     internal_lower_limit = new_lower_limit
 
 
-# Defining function
 def get_internal_upper_limit():
     """
     This function retrieves the internal_upper_limit variable from global variable
 
     :return: internal_upper_limit: The high limit of the scope
     """
-    # Importing variable from global scope
+    # Importing variable
     global internal_upper_limit
-    # Returning variable
+    # Return variable
     return internal_upper_limit
 
 
-# Defining function
 def set_internal_upper_limit(new_upper_limit):
     """
     This function overwrites the internal_lower_limit variable into the new_upper_limit parameter
@@ -157,9 +152,9 @@ def set_internal_upper_limit(new_upper_limit):
     :param new_upper_limit: The new modified upper limit
     :return: None
     """
-    # Importing variable from global scope
+    # Importing variable
     global internal_upper_limit
-    # Redefining variable
+    # Redefine variable
     internal_upper_limit = new_upper_limit
 
 

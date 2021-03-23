@@ -127,7 +127,7 @@ def ask_the_number_to_user():
 
     :return: None
     """
-    # Importing variable from global scope
+    # Importing variable
     global try_number
     global quit_game
 
@@ -139,7 +139,6 @@ def ask_the_number_to_user():
     check_the_number(user_num)
 
 
-# Defining function
 def check_the_number(user_num):
     """
     This function check if the user number is less than , equal or greater than the internal_number
@@ -169,7 +168,6 @@ def check_the_number(user_num):
             win = True
 
 
-# Defining function
 def limits_modify(new_lower_limit, new_upper_limit):
     """
     This function overwrites the internal_lower_limit variable into the new_lower_limit parameter
@@ -184,7 +182,6 @@ def limits_modify(new_lower_limit, new_upper_limit):
     randomize_management.set_internal_upper_limit(new_upper_limit)
 
 
-# Defining function
 def congrats_user():
     """
     This function print the attempts number
@@ -195,7 +192,6 @@ def congrats_user():
     printer_end()
 
 
-# Defining function
 def start_the_finder():
     """
     This function print the main_question with the limits and the game number,
@@ -220,17 +216,15 @@ def start_the_finder():
         randomize_management.get_internal_upper_limit()
     ))
     print(set_middle_space)
-    # Calling function
     randomize_management.set_internal_number()
-    # Iterative control structure
     while not win:
-        # Calling function
         ask_the_number_to_user()
-        # Incrementing variable
+
+        # Incrementing variable of attempts
         try_number += 1
-    # Congrats
     congrats_user()
-    # Resetting variable
+
+    # Reset variable for next game
     win = False
     try_number = 0
 
