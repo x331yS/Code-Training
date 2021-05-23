@@ -21,13 +21,14 @@ int addContact(char *firstName, char *lastName, int age) {
     fclose(file);
     printf("\n/===== New contact create : %s %s =====/", contact.firstname, contact.lastname);
     return 0;
-};
+}
 
 void listContacts() {
     FILE *file = NULL;
     file = fopen(CONTACT, "r+");
+    int i;
     if (file != NULL) {
-        int i = 0;
+
         int age = 0;
         char *firstname = malloc(sizeof(char *) * 100);
         char *lastname = malloc(sizeof(char *) * 100);
@@ -36,13 +37,15 @@ void listContacts() {
         for (i = 0; i < getLinesAmount(); i++) {
             fscanf(file, "%s %s %d", firstname, lastname, &age);
             printf("%d) %s %s - %d\n", i + 1, firstname, lastname, age);
+
         }
         free(firstname);
         free(lastname);
     }
+    printf("There is %d contact(s)", i);
     printf("\n\n/=============    ============/\n");
     fclose(file);
-};
+}
 
 void searchContacts(char wordS[100]) {
     int bool = 0;
