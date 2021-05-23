@@ -19,6 +19,7 @@ int addContact(char *firstName, char *lastName, int age) {
             contact.age
     );
     fclose(file);
+    printf("\n/===== New contact create : %s %s =====/", contact.firstname, contact.lastname);
     return 0;
 };
 
@@ -32,7 +33,7 @@ void listContacts() {
         char *lastname = malloc(sizeof(char *) * 100);
         printf("\n\n/=============    ============/\n\n\n");
         printf("/===== Contact List =====/\n");
-        for (int i = 0; i < getLinesAmount(); i++) {
+        for (i = 0; i < getLinesAmount(); i++) {
             fscanf(file, "%s %s %d", firstname, lastname, &age);
             printf("%d) %s %s - %d\n", i + 1, firstname, lastname, age);
         }
@@ -51,7 +52,6 @@ void searchContacts() {
     int i = 0;
     if (!file)
         printf("\n/=====Cant open file: %s =====/\n", CONTACT);
-
     printf("/===== Search for : ");
     scanf("%s", wordS);
     toLowerCase(wordS);

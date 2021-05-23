@@ -4,17 +4,17 @@
 int getLinesAmount() {
     int *counter = malloc(sizeof(int));
     *counter = 0;
-    FILE *fp;
+    FILE *file;
     char c;
-    fp = fopen(CONTACT, "r");
-    if (fp == NULL) {
+    file = fopen(CONTACT, "r");
+    if (file == NULL) {
         printf("/===== Could not open file %s =====/", CONTACT);
         return 0;
     }
-    for (c = getc(fp); c != EOF; c = getc(fp))
+    for (c = getc(file); c != EOF; c = getc(file))
         if (c == '\n')
             *counter = *counter + 1;
-    fclose(fp);
+    fclose(file);
     return *counter;
 }
 
@@ -40,4 +40,11 @@ void exitingMenu() {
         printf("\n/===== Invalid choice, retry pls ... =====/\n");
         exitingMenu();
     }
+}
+
+void test () {
+    printf("\n/===== Create contact =====/");
+    addContact("Test","Number",1);
+    printf("\n/===== List of contact(s) =====/");
+    listContacts();
 }
