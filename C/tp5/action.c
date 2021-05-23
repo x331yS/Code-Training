@@ -44,16 +44,14 @@ void listContacts() {
     fclose(file);
 };
 
-void searchContacts() {
+void searchContacts(char wordS[100]) {
     int bool = 0;
     FILE *file;
-    char word[100], wordS[100];
+    char word[100];
     file = fopen(CONTACT, "r");
     int i = 0;
     if (!file)
         printf("\n/=====Cant open file: %s =====/\n", CONTACT);
-    printf("/===== Search for : ");
-    scanf("%s", wordS);
     toLowerCase(wordS);
     printf("\n");
     while (fgets(word, 100, file) != NULL) {

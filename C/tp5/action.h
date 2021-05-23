@@ -15,4 +15,4 @@ int addContact(char *firstName, char *lastName, int age);
 
 void listContacts();
 
-void searchContacts();
+void searchContacts(char worDs[100]);

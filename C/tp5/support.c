@@ -42,9 +42,21 @@ void exitingMenu() {
     }
 }
 
-void test () {
+void test (int testNum) {
+    char firstName[100] = "Test";
+    char lastName[100] = "Number";
+    char snum[5];
     printf("\n/===== Create contact =====/");
-    addContact("Test","Number",1);
+    addContact("Test","Number",testNum);
     printf("\n/===== List of contact(s) =====/");
     listContacts();
+    printf("\n/===== Search contact with firstname =====/\n");
+    printf("\n/=== Search for : %s ===/\n",firstName);
+    searchContacts(firstName);
+    printf("\n/===== Search contact with lastname =====/\n");
+    printf("\n/=== Search for : %s ===/\n",lastName);
+    searchContacts(lastName);
+    printf("\n/===== Search contact with age =====/\n");
+    printf("\n/=== Search for : %d ===/\n",testNum);
+    searchContacts(itoa(testNum, snum, 10));
 }

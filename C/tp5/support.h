@@ -4,4 +4,4 @@ char *toLowerCase(char *str);
 
 void exitingMenu();
 
-void test();
+void test(int testNum);
