@@ -34,7 +34,7 @@ void exitingMenu() {
         menu();
     }
     if (exitChoice == 2) {
-        printf("/=====  Exiting...  =====/\n");
+        printf("\n/=====  Exiting...  =====/\n");
         exit(1);
     } else {
         printf("\n/===== Invalid choice, retry pls ... =====/\n");
