@@ -34,13 +34,10 @@ void listContacts() {
         char *lastname = malloc(sizeof(char *) * 100);
         printf("\n\n/=============    ============/\n\n\n");
         printf("/===== Contact List =====/\n");
-        for (i = 0; i < getLinesAmount(); i++) {
+        for (i = 0; i < countBackN(); i++) {
             fscanf(file, "%s %s %d", firstname, lastname, &age);
             printf("%d) %s %s - %d\n", i + 1, firstname, lastname, age);
-
         }
-        free(firstname);
-        free(lastname);
     }
     printf("There is %d contact(s)", i);
     printf("\n\n/=============    ============/\n");

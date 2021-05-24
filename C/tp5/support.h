@@ -1,4 +1,4 @@
-int getLinesAmount();
+int countBackN();
 
 char *toLowerCase(char *str);
 

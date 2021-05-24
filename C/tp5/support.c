@@ -1,7 +1,7 @@
 #include "action.h"
 #include "main.h"
 
-int getLinesAmount() {
+int countBackN() {
     int *counter = malloc(sizeof(int));
     *counter = 0;
     FILE *file;
