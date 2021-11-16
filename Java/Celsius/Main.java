@@ -1,4 +1,3 @@
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("Want to turn Celsius in Fahrenheit?\n Yes - 1\n No - 2");
